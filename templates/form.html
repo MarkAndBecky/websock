@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sock Generator</title>
+</head>
+
+
+<body>
+	<h1>Sock Generator</h1>
+
+    <form>
+        <select name="units">
+            <option value="inch" {% if units == 'inch' %}selected{% endif %} >Inches</option>
+            <option value="cm" {% if units == 'cm' %}selected{% endif %}>Centimetres</option>
+        </select> Units<br>
+        <input name="stitches" type="text" value="{{ stitches }}"> Stitches per 10cm/4"<br>
+        <input name="rows" type="text" value="{{ rows }}"> Rows per 10cm/4"<br>
+        <input name="circum" type="text" value="{{ circum }}"> Circumference around widest part of foot in chosen units<br>
+        <input name="length" type="text" value="{{ length }}"> Length of foot in chosen units<br>
+        <input name="ease" type="text" value="{{ ease }}"> Ease (%)<br>
+
+	    <input type="submit" value="submit">
+    </form>
+
+    {% if gauge[2] == "inches"%}
+    <p>
+        Stitch gauge = {{ gauge[1] }} stitches per {{ gauge[2][0:4] }}<br>
+        Row gauge = {{ gauge[0] }} rows per {{ gauge[2][0:4] }}
+    </p>
+    {% else %}
+    <p>
+        Stitch gauge = {{ gauge[1] }} stitches per {{ gauge[2][0:2] }}<br>
+        Row gauge = {{ gauge[0] }} rows per {{ gauge[2][0:2] }}
+    </p>
+    {% endif %}
+
+    {% for i in (pattern) %}
+	   <p>{{ i }}</p>
+	{% endfor %}
+
+
+</body>
+</html>
