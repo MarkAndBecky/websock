@@ -10,33 +10,86 @@
 
     <form>
         <select name="units">
-            <option value="inch" {% if units == 'inch' %}selected{% endif %} >Inches</option>
-            <option value="cm" {% if units == 'cm' %}selected{% endif %}>Centimetres</option>
+            <option value="inches" {% if sock_info.units == 'inches' %}selected{% endif %} >Inches</option>
+            <option value="cms" {% if sock_info.units == 'cms' %}selected{% endif %}>Centimetres</option>
         </select> Units<br>
-        <input name="stitches" type="text" value="{{ stitches }}"> Stitches per 10cm/4"<br>
-        <input name="rows" type="text" value="{{ rows }}"> Rows per 10cm/4"<br>
+        <input name="stitches" type="text" value="{{ stitches }}"> Stitches per
+        {% if sock_info.units == 'inches' %}4"{% else %}10cm{% endif %}<br>
+        <input name="rows" type="text" value="{{ rows }}"> Rows per
+        {% if sock_info.units == 'inches' %}4"{% else %}10cm{% endif %}<br>
         <input name="circum" type="text" value="{{ circum }}"> Circumference around widest part of foot in chosen units<br>
-        <input name="length" type="text" value="{{ length }}"> Length of foot in chosen units<br>
+        <input name="foot_length" type="text" value="{{ foot_length }}"> Length of foot in chosen units<br>
         <input name="ease" type="text" value="{{ ease }}"> Ease (%)<br>
-
-	    <input type="submit" value="submit">
+        <br>
+	    <input type="submit" value="Generate Pattern">
     </form>
 
-    {% if gauge[2] == "inches"%}
-    <p>
-        Stitch gauge = {{ gauge[1] }} stitches per {{ gauge[2][0:4] }}<br>
-        Row gauge = {{ gauge[0] }} rows per {{ gauge[2][0:4] }}
-    </p>
-    {% else %}
-    <p>
-        Stitch gauge = {{ gauge[1] }} stitches per {{ gauge[2][0:2] }}<br>
-        Row gauge = {{ gauge[0] }} rows per {{ gauge[2][0:2] }}
-    </p>
-    {% endif %}
+    <h2>Gauge</h2>
 
-    {% for i in (pattern) %}
-	   <p>{{ i }}</p>
-	{% endfor %}
+        {% if sock_info.units == "inches"%}
+        <p>
+            {{ "%.1f"|format(sock_info.st_gauge) }} stitches per {{ sock_info.units[0:4] }}<br>
+            {{ "%.1f"|format(sock_info.r_gauge) }} rows per {{ sock_info.units[0:4] }}
+        </p>
+        {% else %}
+        <p>
+            {{ "%.1f"|format(sock_info.st_gauge) }} stitches per {{ sock_info.units[0:2] }}<br>
+            {{ "%.1f"|format(sock_info.r_gauge) }} rows per {{ sock_info.units[0:2] }}
+        </p>
+        {% endif %}
+
+    <h2>Pattern</h2>
+
+    <h3>Toe</h3>
+        <ul>
+            <li>Provisional cast on {{ "%d"|format(cast_on) }} stitches.</li>
+            <li>Knit {{ "%d"|format(cast_on -1) }} stitches until 1 stitch before end, wrap and turn.</li>
+            <li>Purl {{ "%d"|format(cast_on -2) }} stitches until 1 stitch before end, wrap and turn.</li>
+            <li>Knit {{ "%d"|format(cast_on -3) }} stitches until 1 stitch before first wrapped stitch, wrap and turn.</li>
+            <li>Purl {{ "%d"|format(cast_on -4) }} stitches until 1 stitch before first wrapped stitch, wrap and turn.</li>
+            <li>Continue short rows until {{ "%d"|format(toe_end) }} stitches remain unwrapped.  {{ "%d"|format((cast_on - toe_end) / 2) }}
+                stitches wrapped on each side.</li>
+            <li>Knit {{ "%d"|format(toe_end) }}, pick up and knit wrap and next stitch together through back loop, wrap and
+                turn.</li>
+            <li>Purl {{ "%d"|format(toe_end + 1) }}, pick up and purl wrap and next stitch together, wrap and turn.</li>
+            <li>Knit {{ "%d"|format(toe_end + 2) }}, pick up and knit both wraps and next stitch together through back loop, wrap and
+                turn.</li>
+            <li>Purl {{ "%d"|format(toe_end + 3) }}, pick up and purl both wraps and next stitch together, wrap and turn.</li>
+            <li>Continue until all wraps have been consumed.</li>
+            <li>Knit one round.</li>
+        </ul>
+
+    <h3>Foot</h3>
+        <ul>
+            <li>Pick up provisional stitches and begin knitting in the round.  First half of stitches will be the sole,
+                second half will be the instep.</li>
+            <li>If you are using a pattern for the instep and leg, start the pattern on
+                the instep stitches now.</li>
+            <li>Knit until sock measures {{ "%.1f %s"|format((foot_length - heel_length), units) }}.</li>
+        </ul>
+
+    <h3>Heel</h3>
+        <ul>
+            <li>Knit {{ "%d"|format(cast_on -1) }} stitches until 1 stitch before end of sole stitches, wrap and turn.</li>
+            <li>Purl {{ "%d"|format(cast_on -2) }} stitches until 1 stitch before end of sole stitches, wrap and turn.</li>
+            <li>Knit {{ "%d"|format(cast_on -3) }} stitches until 1 stitch before first wrapped stitch, wrap and turn.</li>
+            <li>Purl {{ "%d"|format(cast_on -4) }} stitches until 1 stitch before first wrapped stitch, wrap and turn.</li>
+            <li>Continue short rows until {{ "%d"|format(heel_end) }} stitches remain unwrapped.  {{ "%d"|format((cast_on - heel_end)/2) }}
+                stitches wrapped on each side.</li>
+            <li>Knit {{ "%d"|format(heel_end) }}, pick up and knit wrap and next stitch together, wrap and turn.</li>
+            <li>Purl {{ "%d"|format(heel_end + 1) }}, pick up and purl wrap and next stitch together, wrap and turn.</li>
+            <li>Knit {{ "%d"|format(heel_end + 2) }}, pick up and knit both wraps and next stitch together, wrap and turn.</li>
+            <li>Purl {{ "%d"|format(heel_end + 3) }}, pick up and purl both wrap and next stitch together, wrap and turn.</li>
+            <li>Continue until all wraps have been consumed.</li>
+        </ul>
+
+    <h3>Leg</h3>
+        <ul>
+            <li>Resume knitting in the round.</li>
+            <li>Knit until leg is {{ "%.1f %s"|format((foot_length), units) }}, or desired length before end ribbing.</li>
+            <li>Switch to K1P1 or K2P2 ribbing for {% if sock_info.units == 'inches' %}1 inch{% else %}2.5 cm{% endif %} or desired length.</li>
+            <li>Cast off and weave in ends.</li>
+        </ul>
 
 
 </body>
