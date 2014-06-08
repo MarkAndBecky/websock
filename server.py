@@ -13,18 +13,45 @@ app = Flask(__name__)
 def form():
 
     units = request.args.get('units', 'inches')
-    #if units is None:
-    #    units = "inch"
 
-    stitches = float(request.args.get('stitches', 24))
+    try:
+        stitches = float(request.args.get('stitches', 24))
+        st_color = "#FFFFFF"
+    except ValueError:
+        stitches = 24
+        st_color = "#FA5858"
 
-    rows = float(request.args.get('rows', 30))
+    try:
+        rows = float(request.args.get('rows', 30))
+        r_color = "#FFFFFF"
+    except ValueError:
+        rows = 30
+        r_color = "#FA5858"
 
-    circum = float(request.args.get('circum', 7))
 
-    foot_length = float(request.args.get('foot_length', 8))
+    try:
+        circum = float(request.args.get('circum', 7))
+        c_color = "#FFFFFF"
+    except ValueError:
+        c_color = "#FA5858"
+        circum = 7
 
-    ease = float(request.args.get('ease', -8))
+
+    try:
+        foot_length = float(request.args.get('foot_length', 8))
+        fl_color = "#FFFFFF"
+    except ValueError:
+        fl_color = "#FA5858"
+        foot_length = 8
+
+
+    try:
+        ease = float(request.args.get('ease', -8))
+        e_color = "#FFFFFF"
+    except ValueError:
+        ease = -8
+        e_color = "#FA5858"
+
 
     sock_info = sockgen.Pattern_info(units, stitches, rows)
 
@@ -35,6 +62,7 @@ def form():
     #           "is inches), stitches, rows, circum, length, ease (optional, default is -8)."
     #else:
     result = render_template('form.html',
+                             st_color=st_color, r_color=r_color, c_color=c_color, fl_color=fl_color, e_color=e_color,
                              units=units, stitches=stitches, rows=rows, circum=circum, foot_length=foot_length, ease=ease,
                              sock_info=sock_info,
                              cast_on = pattern[0],

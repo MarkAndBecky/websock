@@ -50,7 +50,7 @@
             <div class="form-group">
                 <label for="input units" class="col-sm-2 control-label">Units</label>
                 <div class="col-sm-2">
-                    <select class="form-control" name="units">
+                    <select class="form-control" name="units" onchange="this.form.submit()">
                         <option value="inches" {% if sock_info.units == 'inches' %}selected{% endif %} >Inches</option>
                         <option value="cms" {% if sock_info.units == 'cms' %}selected{% endif %}>Centimetres</option>
                     </select>
@@ -59,7 +59,7 @@
             <div class="form-group">
                 <label for="horizontal gauge" class="col-sm-2 control-label">Horizontal gauge</label>
                 <div class="col-sm-2">
-                    <input class="form-control" name="stitches" type="text" value="{{ stitches }}">
+                    <input class="form-control" name="stitches" type="text" STYLE="background-color:{{ st_color }}" value="{{ stitches }}">
                 </div>
                 <span class="help-block">Stitches per
                     {% if sock_info.units == 'inches' %}4"{% else %}10 cm{% endif %}</span>
@@ -67,7 +67,7 @@
             <div class="form-group">
                 <label for="vertical gauge" class="col-sm-2 control-label">Vertical gauge</label>
                 <div class="col-sm-2">
-                    <input class="form-control" name="rows" type="text" value="{{ rows }}">
+                    <input class="form-control" name="rows" type="text" STYLE="background-color:{{ r_color }}" value="{{ rows }}">
                 </div>
                 <span class="help-block">Rows per
                     {% if sock_info.units == 'inches' %}4"{% else %}10 cm{% endif %}</span>
@@ -75,7 +75,7 @@
             <div class="form-group">
                 <label for="circumference" class="col-sm-2 control-label">Circumference</label>
                 <div class="col-sm-2">
-                    <input class="form-control" name="circum" type="text" value="{{ circum }}">
+                    <input class="form-control" name="circum" type="text" STYLE="background-color:{{ c_color }}" value="{{ circum }}">
                 </div>
                 <span class="help-block">Circumference around widest part of foot in
                 {{ sock_info.units }}</span>
@@ -83,22 +83,24 @@
             <div class="form-group">
                 <label for="foot length" class="col-sm-2 control-label">Foot length</label>
                 <div class="col-sm-2">
-                    <input class="form-control" name="foot_length" type="text" value="{{ foot_length }}">
+                    <input class="form-control" name="foot_length" type="text" STYLE="background-color:{{ fl_color }}" value="{{ foot_length }}">
                 </div>
                 <span class="help-block">Length of foot in {{ sock_info.units }}</span>
             </div>
             <div class="form-group">
                 <label for="ease" class="col-sm-2 control-label">Ease</label>
                 <div class="col-sm-2">
-                    <input class="form-control" name="ease" type="text" value="{{ ease }}">
+                    <input class="form-control" name="ease" type="text" STYLE="background-color:{{ e_color }}" value="{{ ease }}">
                 </div>
                 <span class="help-block">Ease as % of total number of stitches (default is -8%)</span>
             </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-2">
+
+                <div class="btn-group-sm">
+                    <label class="col-sm-2 control-label"></label>
                     <button type="submit" class="btn btn-info">Generate Pattern</button>
+                    <button type="reset" class="btn btn-info">Reset Form</button>
                 </div>
-            </div>
+
         </form>
 
         <div class="page-header">
