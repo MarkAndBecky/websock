@@ -13,18 +13,18 @@
 
       </div>
 
-      <div id="Form" class="page-header">
-        <h3 class="anchorspace">Yarn and foot details</h3>
+      <div class="page-header">
+        <h3>Yarn and foot details</h3>
       </div>
 
-        <form class="row form-horizontal" role="form">
+        <form class="row form-horizontal" role="form" action="/pattern" method="get">
             <div class="col-sm-6">
             <div class="form-group">
                 <label for="input units" class="col-sm-3 control-label">Units</label>
                 <div class="col-sm-3">
                     <select class="form-control" name="units" onchange="this.form.submit()">
-                        <option value="inches" {% if sock_info.units == 'inches' %}selected{% endif %} >Inches</option>
-                        <option value="cms" {% if sock_info.units == 'cms' %}selected{% endif %}>Centimetres</option>
+                        <option value="inches" {% if units == 'inches' %}selected{% endif %} >Inches</option>
+                        <option value="cms" {% if units == 'cms' %}selected{% endif %}>Centimetres</option>
                     </select>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                     <input class="form-control" name="stitches" type="text" STYLE="background-color:{{ st_color }}" value="{{ stitches }}">
                 </div>
                 <span class="help-block">Stitches per
-                    {% if sock_info.units == 'inches' %}4"{% else %}10 cm{% endif %}</span>
+                    {% if units == 'inches' %}4"{% else %}10 cm{% endif %}</span>
             </div>
             <div class="form-group">
                 <label for="vertical gauge" class="col-sm-3 control-label">Vertical gauge</label>
@@ -42,7 +42,7 @@
                     <input class="form-control" name="rows" type="text" STYLE="background-color:{{ r_color }}" value="{{ rows }}">
                 </div>
                 <span class="help-block">Rows per
-                    {% if sock_info.units == 'inches' %}4"{% else %}10 cm{% endif %}</span>
+                    {% if units == 'inches' %}4"{% else %}10 cm{% endif %}</span>
             </div>
             <div class="form-group">
                 <label for="circumference" class="col-sm-3 control-label">Circumference</label>
@@ -50,14 +50,14 @@
                     <input class="form-control" name="circum" type="text" STYLE="background-color:{{ c_color }}" value="{{ circum }}">
                 </div>
                 <span class="help-block">Circumference around widest part of foot in
-                {{ sock_info.units }}</span>
+                {{ units }}</span>
             </div>
             <div class="form-group">
                 <label for="foot length" class="col-sm-3 control-label">Foot length</label>
                 <div class="col-sm-3">
                     <input class="form-control" name="foot_length" type="text" STYLE="background-color:{{ fl_color }}" value="{{ foot_length }}">
                 </div>
-                <span class="help-block">Length of foot in {{ sock_info.units }}</span>
+                <span class="help-block">Length of foot in {{ units }}</span>
             </div>
             <div class="form-group">
                 <label for="ease" class="col-sm-3 control-label">Ease</label>
@@ -69,7 +69,7 @@
                 <div class="btn-group-sm">
                     <label class="col-sm-3 control-label"></label>
                     <button type="submit" class="btn btn-info">Generate Pattern</button>
-                    <button type="reset" class="btn btn-info">Reset Form</button>
+                    <button type="reset" class="btn btn-info" name="reset" value="reset">Reset Form</button>
                 </div>
              </div>
             <div class="col-sm-5">
@@ -78,115 +78,5 @@
         </form>
 
 
-
-        <div class="page-header">
-            <h3>Gauge</h3>
-        </div>
-            {% if sock_info.units == "inches"%}
-            <p>
-                {{ "%.1f"|format(sock_info.st_gauge) }} stitches per {{ sock_info.units[0:4] }}<br>
-                {{ "%.1f"|format(sock_info.r_gauge) }} rows per {{ sock_info.units[0:4] }}
-            </p>
-            {% else %}
-            <p>
-                {{ "%.1f"|format(sock_info.st_gauge) }} stitches per {{ sock_info.units[0:2] }}<br>
-                {{ "%.1f"|format(sock_info.r_gauge) }} rows per {{ sock_info.units[0:2] }}
-            </p>
-            {% endif %}
-
-        <div id="Pattern" class="page-header">
-            <h3 class="anchorspace" >Pattern</h3>
-        </div>
-
-       <div class="row">
-            <div class="col-sm-8">
-              <div class="panel panel-info">
-                <div class="panel-heading">
-                  <h4 class="panel-title">Toe</h4>
-                </div>
-                <div class="panel-body">
-                    <ul>
-                        <li><a href="/links#Provisional">Provisional cast on</a> {{ "%d"|format(cast_on) }} stitches.</li>
-                        <li>Knit {{ "%d"|format(cast_on -1) }} stitches until 1 stitch before end, <a href="/links#shortrows">wrap and turn</a>.</li>
-                        <li>Purl {{ "%d"|format(cast_on -2) }} stitches until 1 stitch before end, wrap and turn.</li>
-                        <li>Knit {{ "%d"|format(cast_on -3) }} stitches until 1 stitch before first wrapped stitch, wrap and turn.</li>
-                        <li>Purl {{ "%d"|format(cast_on -4) }} stitches until 1 stitch before first wrapped stitch, wrap and turn.</li>
-                        <li>Continue short rows until {{ "%d"|format(toe_end) }} stitches remain unwrapped.  {{ "%d"|format((cast_on - toe_end) / 2) }}
-                            stitches wrapped on each side.</li>
-                        <li>Knit {{ "%d"|format(toe_end) }}, pick up and knit wrap and next stitch together through back loop, wrap and
-                            turn.</li>
-                        <li>Purl {{ "%d"|format(toe_end + 1) }}, pick up and purl wrap and next stitch together, wrap and turn.</li>
-                        <li>Knit {{ "%d"|format(toe_end + 2) }}, pick up and knit both wraps and next stitch together through back loop, wrap and
-                            turn.</li>
-                        <li>Purl {{ "%d"|format(toe_end + 3) }}, pick up and purl both wraps and next stitch together, wrap and turn.</li>
-                        <li>Continue until all wraps have been consumed.</li>
-                        <li>Knit one round.</li>
-                    </ul>
-                 </div>
-              </div>
-            </div>
-        </div>
-
-        <div class = "row">
-           <div class="col-sm-8">
-              <div class="panel panel-info">
-                <div class="panel-heading">
-                  <h4 class="panel-title">Foot</h4>
-                </div>
-                <div class="panel-body">
-                    <ul>
-                        <li>Pick up provisional stitches and begin knitting in the round.  First half of stitches will be the sole,
-                            second half will be the instep.</li>
-                        <li>If you are using a pattern for the instep and leg, start the pattern on
-                            the instep stitches now.</li>
-                        <li>Knit until sock measures {{ "%.1f %s"|format((foot_length - heel_length), units) }}.</li>
-                    </ul>
-                 </div>
-               </div>
-            </div>
-        </div>
-
-        <div class = "row">
-           <div class="col-sm-8">
-              <div class="panel panel-info">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Heel</h3>
-                </div>
-                <div class="panel-body">
-                    <ul>
-                        <li>Knit {{ "%d"|format(cast_on -1) }} stitches until 1 stitch before end of sole stitches, wrap and turn.</li>
-                        <li>Purl {{ "%d"|format(cast_on -2) }} stitches until 1 stitch before end of sole stitches, wrap and turn.</li>
-                        <li>Knit {{ "%d"|format(cast_on -3) }} stitches until 1 stitch before first wrapped stitch, wrap and turn.</li>
-                        <li>Purl {{ "%d"|format(cast_on -4) }} stitches until 1 stitch before first wrapped stitch, wrap and turn.</li>
-                        <li>Continue short rows until {{ "%d"|format(heel_end) }} stitches remain unwrapped.  {{ "%d"|format((cast_on - heel_end)/2) }}
-                            stitches wrapped on each side.</li>
-                        <li>Knit {{ "%d"|format(heel_end) }}, pick up and knit wrap and next stitch together, wrap and turn.</li>
-                        <li>Purl {{ "%d"|format(heel_end + 1) }}, pick up and purl wrap and next stitch together, wrap and turn.</li>
-                        <li>Knit {{ "%d"|format(heel_end + 2) }}, pick up and knit both wraps and next stitch together, wrap and turn.</li>
-                        <li>Purl {{ "%d"|format(heel_end + 3) }}, pick up and purl both wrap and next stitch together, wrap and turn.</li>
-                        <li>Continue until all wraps have been consumed.</li>
-                    </ul>
-                 </div>
-              </div>
-           </div>
-        </div>
-
-        <div class = "row">
-           <div class="col-sm-8">
-              <div class="panel panel-info">
-                <div class="panel-heading">
-                  <h4 class="panel-title">Leg</h4>
-                </div>
-                <div class="panel-body">
-                    <ul>
-                        <li>Resume knitting in the round.</li>
-                        <li>Knit until leg is {{ "%.1f %s"|format((foot_length), units) }}, or desired length before end ribbing.</li>
-                        <li>Switch to K1P1 or K2P2 ribbing for {% if sock_info.units == 'inches' %}1 inch{% else %}2.5 cm{% endif %} or desired length.</li>
-                        <li><a href="/links#castoffs">Cast off</a> and weave in ends.</li>
-                    </ul>
-                 </div>
-              </div>
-           </div>
-        </div>
 
 {% endblock content %}

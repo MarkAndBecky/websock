@@ -3,14 +3,13 @@ body {
   padding-left: 50px;
 }
 
-.starter-template {
-  padding: 40px 15px;
-  text-align: center;
-}
-
 .form-group {
     margin-bottom: 4px}
 
+.page-header{
+    margin-top: 30px;
+    padding-bottom: 0px;
+}
 
 .anchorspace{
     padding-top: 60px;

@@ -1,0 +1,131 @@
+{% extends "_base.html" %}
+
+
+{% block content %}
+
+      <div class="page-header">
+        <h2>Your Customised Sock Pattern</h2>
+    </div>
+
+            <p>
+                <strong>Gauge</strong><br>
+            {% if sock_info.units == "inches"%}
+                {{ "%.1f"|format(sock_info.st_gauge) }} stitches per {{ sock_info.units[0:4] }}<br>
+                {{ "%.1f"|format(sock_info.r_gauge) }} rows per {{ sock_info.units[0:4] }}
+            {% else %}
+                {{ "%.1f"|format(sock_info.st_gauge) }} stitches per {{ sock_info.units[0:2] }}<br>
+                {{ "%.1f"|format(sock_info.r_gauge) }} rows per {{ sock_info.units[0:2] }}
+            </p>
+            {% endif %}
+
+            <p>
+                <strong>Foot Circumference</strong><br>
+                {{ circum }} {{ units }}
+            </p>
+
+           <p>
+                <strong>Foot Length</strong><br>
+                {{ foot_length }} {{ units }}
+            </p>
+
+            <p>
+                <strong>Ease</strong><br>
+                {{ ease }} %
+            </p>
+
+        <div class="page-header">
+            <h3>Pattern</h3>
+        </div>
+
+       <div class="row">
+            <div class="col-sm-8">
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h4 class="panel-title">Toe</h4>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li><a href="/links#Provisional">Provisional cast on</a> {{ "%d"|format(cast_on) }} stitches.</li>
+                        <li>Knit {{ "%d"|format(cast_on -1) }} stitches until 1 stitch before end, <a href="/links#shortrows">wrap and turn</a>.</li>
+                        <li>Purl {{ "%d"|format(cast_on -2) }} stitches until 1 stitch before end, wrap and turn.</li>
+                        <li>Knit {{ "%d"|format(cast_on -3) }} stitches until 1 stitch before first wrapped stitch, wrap and turn.</li>
+                        <li>Purl {{ "%d"|format(cast_on -4) }} stitches until 1 stitch before first wrapped stitch, wrap and turn.</li>
+                        <li>Continue short rows until {{ "%d"|format(toe_end) }} stitches remain unwrapped.  {{ "%d"|format((cast_on - toe_end) / 2) }}
+                            stitches wrapped on each side.</li>
+                        <li>Knit {{ "%d"|format(toe_end) }}, pick up and knit wrap and next stitch together through back loop, wrap and
+                            turn.</li>
+                        <li>Purl {{ "%d"|format(toe_end + 1) }}, pick up and purl wrap and next stitch together, wrap and turn.</li>
+                        <li>Knit {{ "%d"|format(toe_end + 2) }}, pick up and knit both wraps and next stitch together through back loop, wrap and
+                            turn.</li>
+                        <li>Purl {{ "%d"|format(toe_end + 3) }}, pick up and purl both wraps and next stitch together, wrap and turn.</li>
+                        <li>Continue until all wraps have been consumed.</li>
+                        <li>Knit one round.</li>
+                    </ul>
+                 </div>
+              </div>
+            </div>
+        </div>
+
+        <div class = "row">
+           <div class="col-sm-8">
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h4 class="panel-title">Foot</h4>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li>Pick up provisional stitches and begin knitting in the round.  First half of stitches will be the sole,
+                            second half will be the instep.</li>
+                        <li>If you are using a pattern for the instep and leg, start the pattern on
+                            the instep stitches now.</li>
+                        <li>Knit until sock measures {{ "%.1f %s"|format((foot_length - heel_length), units) }}.</li>
+                    </ul>
+                 </div>
+               </div>
+            </div>
+        </div>
+
+        <div class = "row">
+           <div class="col-sm-8">
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Heel</h3>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li>Knit {{ "%d"|format(cast_on -1) }} stitches until 1 stitch before end of sole stitches, wrap and turn.</li>
+                        <li>Purl {{ "%d"|format(cast_on -2) }} stitches until 1 stitch before end of sole stitches, wrap and turn.</li>
+                        <li>Knit {{ "%d"|format(cast_on -3) }} stitches until 1 stitch before first wrapped stitch, wrap and turn.</li>
+                        <li>Purl {{ "%d"|format(cast_on -4) }} stitches until 1 stitch before first wrapped stitch, wrap and turn.</li>
+                        <li>Continue short rows until {{ "%d"|format(heel_end) }} stitches remain unwrapped.  {{ "%d"|format((cast_on - heel_end)/2) }}
+                            stitches wrapped on each side.</li>
+                        <li>Knit {{ "%d"|format(heel_end) }}, pick up and knit wrap and next stitch together, wrap and turn.</li>
+                        <li>Purl {{ "%d"|format(heel_end + 1) }}, pick up and purl wrap and next stitch together, wrap and turn.</li>
+                        <li>Knit {{ "%d"|format(heel_end + 2) }}, pick up and knit both wraps and next stitch together, wrap and turn.</li>
+                        <li>Purl {{ "%d"|format(heel_end + 3) }}, pick up and purl both wrap and next stitch together, wrap and turn.</li>
+                        <li>Continue until all wraps have been consumed.</li>
+                    </ul>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+        <div class = "row">
+           <div class="col-sm-8">
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h4 class="panel-title">Leg</h4>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li>Resume knitting in the round.</li>
+                        <li>Knit until leg is {{ "%.1f %s"|format((foot_length), units) }}, or desired length before end ribbing.</li>
+                        <li>Switch to K1P1 or K2P2 ribbing for {% if sock_info.units == 'inches' %}1 inch{% else %}2.5 cm{% endif %} or desired length.</li>
+                        <li><a href="/links#castoffs">Cast off</a> and weave in ends.</li>
+                    </ul>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+{% endblock content %}
