@@ -1,55 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "_base.html" %}
 
-    <head>
-        <meta charset="utf-8">
-        <title>Sock Generator</title>
 
-        <!-- Bootstrap core CSS -->
-        <link href="../static/bootstrap.min.css" rel="stylesheet">
-        <!-- Bootstrap theme -->
-        <link href="../static/bootstrap-theme.min.css" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <link href="../static/websock.css" rel="stylesheet">
-
-    </head>
-    <body>
-
-        <!-- Fixed navbar -->
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">Sock Generator</a>
-            </div>
-            <div class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="#Form">Form</a></li>
-                <li><a href="#Pattern">Pattern</a></li>
-
-              </ul>
-            </div><!--/.nav-collapse -->
-          </div>
-        </div>
+{% block content %}
 
       <div class="page-header">
-        <h1>Customised Sock Pattern Generator</h1>
+        <h2>Customised Sock Pattern Generator</h2>
+
+        <p>
+           A knitting pattern generator for socks to fit feet of any size!  These socks are knit toe-up with a short-row
+            toe and heel.
+        </p>
+
       </div>
 
       <div id="Form" class="page-header">
-        <h2>Yarn and foot details</h1>
+        <h3 class="anchorspace">Yarn and foot details</h3>
       </div>
 
-        <form class="form-horizontal" role="form">
+        <form class="row form-horizontal" role="form">
+            <div class="col-sm-6">
             <div class="form-group">
-                <label for="input units" class="col-sm-2 control-label">Units</label>
-                <div class="col-sm-2">
+                <label for="input units" class="col-sm-3 control-label">Units</label>
+                <div class="col-sm-3">
                     <select class="form-control" name="units" onchange="this.form.submit()">
                         <option value="inches" {% if sock_info.units == 'inches' %}selected{% endif %} >Inches</option>
                         <option value="cms" {% if sock_info.units == 'cms' %}selected{% endif %}>Centimetres</option>
@@ -57,54 +29,58 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="horizontal gauge" class="col-sm-2 control-label">Horizontal gauge</label>
-                <div class="col-sm-2">
+                <label for="horizontal gauge" class="col-sm-3 control-label">Horizontal gauge</label>
+                <div class="col-sm-3">
                     <input class="form-control" name="stitches" type="text" STYLE="background-color:{{ st_color }}" value="{{ stitches }}">
                 </div>
                 <span class="help-block">Stitches per
                     {% if sock_info.units == 'inches' %}4"{% else %}10 cm{% endif %}</span>
             </div>
             <div class="form-group">
-                <label for="vertical gauge" class="col-sm-2 control-label">Vertical gauge</label>
-                <div class="col-sm-2">
+                <label for="vertical gauge" class="col-sm-3 control-label">Vertical gauge</label>
+                <div class="col-sm-3">
                     <input class="form-control" name="rows" type="text" STYLE="background-color:{{ r_color }}" value="{{ rows }}">
                 </div>
                 <span class="help-block">Rows per
                     {% if sock_info.units == 'inches' %}4"{% else %}10 cm{% endif %}</span>
             </div>
             <div class="form-group">
-                <label for="circumference" class="col-sm-2 control-label">Circumference</label>
-                <div class="col-sm-2">
+                <label for="circumference" class="col-sm-3 control-label">Circumference</label>
+                <div class="col-sm-3">
                     <input class="form-control" name="circum" type="text" STYLE="background-color:{{ c_color }}" value="{{ circum }}">
                 </div>
                 <span class="help-block">Circumference around widest part of foot in
                 {{ sock_info.units }}</span>
             </div>
             <div class="form-group">
-                <label for="foot length" class="col-sm-2 control-label">Foot length</label>
-                <div class="col-sm-2">
+                <label for="foot length" class="col-sm-3 control-label">Foot length</label>
+                <div class="col-sm-3">
                     <input class="form-control" name="foot_length" type="text" STYLE="background-color:{{ fl_color }}" value="{{ foot_length }}">
                 </div>
                 <span class="help-block">Length of foot in {{ sock_info.units }}</span>
             </div>
             <div class="form-group">
-                <label for="ease" class="col-sm-2 control-label">Ease</label>
-                <div class="col-sm-2">
+                <label for="ease" class="col-sm-3 control-label">Ease</label>
+                <div class="col-sm-3">
                     <input class="form-control" name="ease" type="text" STYLE="background-color:{{ e_color }}" value="{{ ease }}">
                 </div>
                 <span class="help-block">Ease as % of total number of stitches (default is -8%)</span>
             </div>
-
                 <div class="btn-group-sm">
-                    <label class="col-sm-2 control-label"></label>
+                    <label class="col-sm-3 control-label"></label>
                     <button type="submit" class="btn btn-info">Generate Pattern</button>
                     <button type="reset" class="btn btn-info">Reset Form</button>
                 </div>
-
+             </div>
+            <div class="col-sm-5">
+                <img class="img-responsive" src="https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xpa1/v/t34.0-12/10510199_10152501043943162_393726851_n.jpg?oh=1f754248fd18c2ef32345282329e8732&oe=53C0BEBF&__gda__=1405131054_d17db2f6c3bd7e6a18f881ca79b27bf4">
+            </div>
         </form>
 
+
+
         <div class="page-header">
-            <h2>Gauge</h2>
+            <h3>Gauge</h3>
         </div>
             {% if sock_info.units == "inches"%}
             <p>
@@ -118,21 +94,20 @@
             </p>
             {% endif %}
 
-
         <div id="Pattern" class="page-header">
-            <h2>Pattern</h2>
+            <h3 class="anchorspace" >Pattern</h3>
         </div>
 
        <div class="row">
             <div class="col-sm-8">
               <div class="panel panel-info">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Toe</h3>
+                  <h4 class="panel-title">Toe</h4>
                 </div>
                 <div class="panel-body">
                     <ul>
-                        <li>Provisional cast on {{ "%d"|format(cast_on) }} stitches.</li>
-                        <li>Knit {{ "%d"|format(cast_on -1) }} stitches until 1 stitch before end, wrap and turn.</li>
+                        <li><a href="/links#Provisional">Provisional cast on</a> {{ "%d"|format(cast_on) }} stitches.</li>
+                        <li>Knit {{ "%d"|format(cast_on -1) }} stitches until 1 stitch before end, <a href="/links#shortrows">wrap and turn</a>.</li>
                         <li>Purl {{ "%d"|format(cast_on -2) }} stitches until 1 stitch before end, wrap and turn.</li>
                         <li>Knit {{ "%d"|format(cast_on -3) }} stitches until 1 stitch before first wrapped stitch, wrap and turn.</li>
                         <li>Purl {{ "%d"|format(cast_on -4) }} stitches until 1 stitch before first wrapped stitch, wrap and turn.</li>
@@ -156,7 +131,7 @@
            <div class="col-sm-8">
               <div class="panel panel-info">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Foot</h3>
+                  <h4 class="panel-title">Foot</h4>
                 </div>
                 <div class="panel-body">
                     <ul>
@@ -200,19 +175,18 @@
            <div class="col-sm-8">
               <div class="panel panel-info">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Leg</h3>
+                  <h4 class="panel-title">Leg</h4>
                 </div>
                 <div class="panel-body">
                     <ul>
                         <li>Resume knitting in the round.</li>
                         <li>Knit until leg is {{ "%.1f %s"|format((foot_length), units) }}, or desired length before end ribbing.</li>
                         <li>Switch to K1P1 or K2P2 ribbing for {% if sock_info.units == 'inches' %}1 inch{% else %}2.5 cm{% endif %} or desired length.</li>
-                        <li>Cast off and weave in ends.</li>
+                        <li><a href="/links#castoffs">Cast off</a> and weave in ends.</li>
                     </ul>
                  </div>
               </div>
            </div>
         </div>
 
-    </body>
-</html>
+{% endblock content %}

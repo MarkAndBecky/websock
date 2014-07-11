@@ -72,7 +72,9 @@ def form():
                              )
     return result
 
-
+@app.route('/links')
+def links():
+    return render_template('links.html', links = True)
 
 if __name__ == '__main__':
     app.run('0.0.0.0', 8000, debug=True)

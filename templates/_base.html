@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <link rel="icon"
+        type="image/png"
+        href="../static/sock-icon.png">
+
+        <title>Sock Generator</title>
+
+
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <!-- Bootstrap theme -->
+        <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+        <!-- Custom styles for this template -->
+        <link href="../static/websock.css" rel="stylesheet">
+
+
+
+
+
+    </head>
+    <body>
+
+    <div class="wrap">
+        <!-- Fixed navbar -->
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">Sock Generator</a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                  {% if not links %}
+                <li><a href="/#Form">Form</a></li>
+                <li><a href="/#Pattern">Pattern</a></li>
+                  {% endif %}
+
+                <li class="dropdown">
+                  <a href="/links" class="dropdown-toggle" data-toggle="dropdown">Useful Links<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                      <li><a href="/links">All links</a></li>
+                      <li class="divider"></li>
+                      <li><a href="/links#Provisional">Provisional cast ons</a></li>
+                      <li><a href="/links#magicloop">Magic loop knitting</a></li>
+                      <li><a href="/links#shortrows">Short rows</a></li>
+                      <li><a href="/links#castoffs">Stretchy cast offs</a></li>
+                  </ul>
+                </li>
+
+
+
+
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+
+
+    {% block content %}
+
+        Need to define a block!
+
+    {% endblock content %}
+
+
+
+    </div> <!--/end of page .wrap -->
+
+  </body>
+
+
+<!----Javascript ------->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+</html>
