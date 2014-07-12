@@ -4,7 +4,7 @@
 {% block content %}
 
       <div class="page-header">
-        <h2>Your Customised Sock Pattern</h2>
+        <h2>Your Custom Sock Pattern</h2>
     </div>
 
             <p>
@@ -38,7 +38,7 @@
         </div>
 
        <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-10">
               <div class="panel panel-info">
                 <div class="panel-heading">
                   <h4 class="panel-title">Toe</h4>
@@ -58,8 +58,9 @@
                         <li>Knit {{ "%d"|format(toe_end + 2) }}, pick up and knit both wraps and next stitch together through back loop, wrap and
                             turn.</li>
                         <li>Purl {{ "%d"|format(toe_end + 3) }}, pick up and purl both wraps and next stitch together, wrap and turn.</li>
-                        <li>Continue until all wraps have been consumed.</li>
-                        <li>Knit one round.</li>
+                        <li>Continue until there is one double-wrapped stitch at each end.  You will have just wrapped the last stitch on a
+                        purl row and turned to the knit side again.</li>
+
                     </ul>
                  </div>
               </div>
@@ -67,17 +68,18 @@
         </div>
 
         <div class = "row">
-           <div class="col-sm-8">
+           <div class="col-sm-10">
               <div class="panel panel-info">
                 <div class="panel-heading">
                   <h4 class="panel-title">Foot</h4>
                 </div>
                 <div class="panel-body">
                     <ul>
-                        <li>Pick up provisional stitches and begin knitting in the round.  First half of stitches will be the sole,
-                            second half will be the instep.</li>
-                        <li>If you are using a pattern for the instep and leg, start the pattern on
-                            the instep stitches now.</li>
+                        <li>Pick up provisional stitches and begin knitting in the round.</li>
+                        <li>Knit two full rounds, picking up and knitting the wraps at the end of the short row section on the
+                        first round, and the wraps at the beginning of the short row section on the second round.</li>
+                        <li>The first half of the stitches will be the sole, the second half will be the instep.  If you
+                            are using a pattern for the instep and leg, start the pattern on the instep stitches now.</li>
                         <li>Knit until sock measures {{ "%.1f %s"|format((foot_length - heel_length), units) }}.</li>
                     </ul>
                  </div>
@@ -86,7 +88,7 @@
         </div>
 
         <div class = "row">
-           <div class="col-sm-8">
+           <div class="col-sm-10">
               <div class="panel panel-info">
                 <div class="panel-heading">
                   <h3 class="panel-title">Heel</h3>
@@ -103,7 +105,9 @@
                         <li>Purl {{ "%d"|format(heel_end + 1) }}, pick up and purl wrap and next stitch together, wrap and turn.</li>
                         <li>Knit {{ "%d"|format(heel_end + 2) }}, pick up and knit both wraps and next stitch together, wrap and turn.</li>
                         <li>Purl {{ "%d"|format(heel_end + 3) }}, pick up and purl both wrap and next stitch together, wrap and turn.</li>
-                        <li>Continue until all wraps have been consumed.</li>
+                        <li>Continue until there is one double-wrapped stitch at each end.  You will have just wrapped the last stitch on a
+                        purl row and turned to the knit side again.</li>
+
                     </ul>
                  </div>
               </div>
@@ -111,7 +115,7 @@
         </div>
 
         <div class = "row">
-           <div class="col-sm-8">
+           <div class="col-sm-10">
               <div class="panel panel-info">
                 <div class="panel-heading">
                   <h4 class="panel-title">Leg</h4>
@@ -119,6 +123,10 @@
                 <div class="panel-body">
                     <ul>
                         <li>Resume knitting in the round.</li>
+                        <li>Knit two full rounds, picking up and knitting the wraps at the end of the short row section on the
+                        first round, and the wraps at the beginning of the short row section on the second round.  Remember to
+                        continue your pattern over the instep stitches.</li>
+                        <li>If you are using a pattern on the instep, begin to knit it over all stitches now.</li>
                         <li>Knit until leg is {{ "%.1f %s"|format((foot_length), units) }}, or desired length before end ribbing.</li>
                         <li>Switch to K1P1 or K2P2 ribbing for {% if sock_info.units == 'inches' %}1 inch{% else %}2.5 cm{% endif %} or desired length.</li>
                         <li><a href="/links#castoffs">Cast off</a> and weave in ends.</li>

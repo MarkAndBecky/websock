@@ -3,19 +3,31 @@
 
 {% block content %}
 
-      <div class="page-header">
-        <h2>Customised Sock Pattern Generator</h2>
+    <div class="row">
+        <div class="page-header">
+            <div class="col-sm-11">
+            <h2>Sock Pattern Generator</h2>
+                <p>
+                   A knitting pattern generator for socks to fit feet of any size!  These socks are knit toe-up with a short-row
+                    toe and heel. <br><br>
+                    This is a very basic recipe for making a sock, and assumes you are already familiar with sock-making in
+                    general and with techniques such as provisional cast on and short rows.  Choose your preferred method
+                    or take a look at the <a href="/links">useful links</a> page. <br><br>
+                    No particular stitch pattern is suggested for the sock instep or leg.  Choose your own after you finish the toe.
+                    A simple ribbing pattern always works well. <br><br>
+                    <strong>Warning!</strong> If you are using a stitch pattern, make sure your pattern repeat divides
+                    evenly into your total stitches.  Your total stitches will be twice the number of stitches you cast on
+                    for the toe.
+                </p>
+            </div>
+        </div>
+    </div>
 
-        <p>
-           A knitting pattern generator for socks to fit feet of any size!  These socks are knit toe-up with a short-row
-            toe and heel.
-        </p>
-
-      </div>
-
-      <div class="page-header">
-        <h3>Yarn and foot details</h3>
-      </div>
+      <div class="row page-header">
+         <div class="col-sm-11">
+            <h3>Yarn and foot details</h3>
+        </div>
+     </div>
 
         <form class="row form-horizontal" role="form" action="/pattern" method="get">
             <div class="col-sm-6">
@@ -73,7 +85,7 @@
                 </div>
              </div>
             <div class="col-sm-5">
-                <img class="img-responsive" src="https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xpa1/v/t34.0-12/10510199_10152501043943162_393726851_n.jpg?oh=1f754248fd18c2ef32345282329e8732&oe=53C0BEBF&__gda__=1405131054_d17db2f6c3bd7e6a18f881ca79b27bf4">
+                <img class="img-responsive" src="..\static\socks.jpg">
             </div>
         </form>
 
