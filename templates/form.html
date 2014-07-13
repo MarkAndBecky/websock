@@ -34,7 +34,9 @@
             <div class="form-group">
                 <label for="input units" class="col-sm-3 control-label">Units</label>
                 <div class="col-sm-3">
-                    <select class="form-control" name="units" onchange="this.form.submit()">
+                    <!--
+                    <select class="form-control" name="units" onchange="this.form.submit()"> -->
+                    <select class="form-control" name="units">
                         <option value="inches" {% if units == 'inches' %}selected{% endif %} >Inches</option>
                         <option value="cms" {% if units == 'cms' %}selected{% endif %}>Centimetres</option>
                     </select>
