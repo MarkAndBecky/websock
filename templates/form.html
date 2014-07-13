@@ -29,14 +29,12 @@
         </div>
      </div>
 
-        <form class="row form-horizontal" role="form" action="/pattern" method="get">
+        <form id="pattern-form" class="row form-horizontal" role="form" name="myform" method="get">
             <div class="col-sm-6">
             <div class="form-group">
                 <label for="input units" class="col-sm-3 control-label">Units</label>
                 <div class="col-sm-3">
-                    <!--
-                    <select class="form-control" name="units" onchange="this.form.submit()"> -->
-                    <select class="form-control" name="units">
+                    <select id="units" class="form-control" name="units" value="update" >
                         <option value="inches" {% if units == 'inches' %}selected{% endif %} >Inches</option>
                         <option value="cms" {% if units == 'cms' %}selected{% endif %}>Centimetres</option>
                     </select>
@@ -82,15 +80,21 @@
             </div>
                 <div class="btn-group-sm">
                     <label class="col-sm-3 control-label"></label>
-                    <button type="submit" class="btn btn-info">Generate Pattern</button>
+                    <button id="generate-button" class="btn btn-info" >Generate Pattern</button>
                     <a class="btn btn-info" href="/">Reset Form</a>
                 </div>
              </div>
             <div class="col-sm-5">
-                <img class="img-responsive" src="..\static\socks.jpg">
+                <img class="img-responsive" src="../static/socks.jpg">
             </div>
         </form>
 
 
 
 {% endblock content %}
+
+{% block javascript %}
+
+<script src="../static/socks.js"></script>
+
+{% endblock javascript %}
