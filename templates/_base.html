@@ -72,6 +72,12 @@
     {% endblock content %}
 
 
+    <div class="row page-header"></div>
+      <div class="row page-header">
+         <div class="col-sm-11">
+            <p>About me: I'm rebkwok on <a href="http://www.ravelry.com/designers/becky-smith">Ravelry</a> and <a href="https://twitter.com/rebkwok">Twitter</a>.</p>
+        </div>
+     </div>
 
     </div> <!--/end of page .wrap -->
 
@@ -79,7 +85,20 @@
 
 
 <!----Javascript ------->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+<!----Google Analytics ------->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-52786107-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
 
 </html>
